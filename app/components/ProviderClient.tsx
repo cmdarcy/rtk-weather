@@ -1,10 +1,14 @@
 'use client';
 
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Provider } from 'react-redux';
 import { store } from '../Store/store';
 
-function ProviderClient({ children }) {
+type ProviderClientProps = {
+  children: ReactNode[] | ReactNode;
+};
+
+function ProviderClient({ children }: ProviderClientProps) {
   return <Provider store={store}> {children} </Provider>;
 }
 

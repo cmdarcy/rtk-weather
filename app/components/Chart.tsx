@@ -1,9 +1,16 @@
 'use client';
 
 import React from 'react';
-import { Sparklines, SparklinesBars, SparklinesReferenceLine } from 'react-sparklines';
+import {
+  Sparklines,
+  SparklinesBars,
+  SparklinesReferenceLine,
+} from 'react-sparklines';
 
-function Chart({ forecastData }) {
+type ChartProps = {
+  forecastData: number[];
+};
+function Chart({ forecastData }: ChartProps) {
   return (
     <div>
       <Sparklines data={forecastData}>

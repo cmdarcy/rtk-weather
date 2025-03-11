@@ -3,7 +3,7 @@ import { RootState } from '../store';
 
 const APIKEY = `c8d0a8706ef69da2623e093b018f765f`;
 
-type ForecastDataPoint = {
+export type ForecastDataPoint = {
   dt: number;
   main: {
     temp: number;
@@ -29,7 +29,7 @@ type ForecastDataPoint = {
   dt_text: string;
 };
 
-type WeatherData = {
+export type WeatherData = {
   cod: string;
   message: number;
   cnt: number;
@@ -59,7 +59,7 @@ export const fetchForecast = createAsyncThunk(
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-      const data: WeatherData = await response.json();
+      const data = (await response.json()) as WeatherData;
       return data;
     } catch (error) {
       if (error instanceof Error) {
@@ -72,13 +72,13 @@ export const fetchForecast = createAsyncThunk(
 );
 
 type ForecastState = {
-  forecast: WeatherData | object;
+  forecast: WeatherData | null;
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 };
 
 const initialState: ForecastState = {
-  forecast: {},
+  forecast: null,
   status: 'idle',
   error: null,
 };
@@ -103,6 +103,6 @@ const forecastSlice = createSlice({
   },
 });
 
-export const selectForecast = (state: RootState) => state.forecast.forecast
+export const selectForecast = (state: RootState) => state.forecast;
 
 export default forecastSlice.reducer;

@@ -3,16 +3,24 @@
 import Chart from './components/Chart';
 import SearchForm from './components/SearchForm';
 import { useAppSelector } from './Store/hook';
-import { selectForecast } from './Store/slices/forecastSlice';
+import {
+  ForecastDataPoint,
+  selectForecast,
+} from './Store/slices/forecastSlice';
 
 export default function Home() {
   const forecast = useAppSelector(selectForecast);
-  if (Object.keys(forecast).length !== 0) {
-    const tempForecasts = forecast.list.map(
-      (foreCastEntry) => foreCastEntry.main.temp,
+  if (forecast.status === 'succeeded') {
+    const tempForecasts = forecast.forecast.list.map(
+      (foreCastEntry: ForecastDataPoint) => foreCastEntry.main.temp,
     );
-    const pressureForecasts = forecast.list.map((foreCastEntry) => foreCastEntry.main.pressure)
-    const humidityForecasts = forecast.list.map((foreCastEntry) => foreCastEntry.main.humidity)
+    const pressureForecasts = forecast.forecast.list.map(
+      (foreCastEntry: ForecastDataPoint) => foreCastEntry.main.pressure,
+    );
+    const humidityForecasts = forecast.forecast.list.map(
+      (foreCastEntry: ForecastDataPoint) => foreCastEntry.main.humidity,
+    );
+
     return (
       <main>
         <h1>RTK Weather</h1>
