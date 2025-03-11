@@ -1,13 +1,13 @@
 'use client';
 
 import React, { FormEvent, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { fetchForecast } from '../Store/slices/forecastSlice';
+import { useAppDispatch } from '../Store/hook';
 
 function SearchForm() {
   const [searchTerm, setSearchTerm] = useState('');
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleSubmit = function (e: FormEvent) {
     e.preventDefault();
