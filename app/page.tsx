@@ -25,12 +25,14 @@ export default function Home() {
       <main>
         <h1>RTK Weather</h1>
         <SearchForm />
-        <Chart forecastData={tempForecasts} />
-        <Chart forecastData={pressureForecasts} />
-        <Chart forecastData={humidityForecasts} />
+        <Chart title="Temperature" forecastData={tempForecasts} units="°F" />
+        <Chart title="Pressure" forecastData={pressureForecasts} units="hPa" />
+        <Chart title="Humidity" forecastData={humidityForecasts} units="%" />
       </main>
     );
   }
+  // TODO add today's forecast component
+  // TODO Add error fetching message
   return (
     <main>
       <h1>RTK Weather</h1>
