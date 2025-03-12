@@ -11,7 +11,12 @@ function SearchForm() {
 
   const handleSubmit = function (e: FormEvent) {
     e.preventDefault();
-    dispatch(fetchForecast(searchTerm));
+    if (searchTerm.trim() === '') {
+      // TODO More Professional Alert
+      alert('Please enter a city to search!');
+    } else {
+      dispatch(fetchForecast(searchTerm));
+    }
   };
   return (
     <form action="" onSubmit={handleSubmit}>
@@ -22,6 +27,7 @@ function SearchForm() {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         placeholder="Search for a City"
+        required
       />
       <button type="submit">Search</button>
     </form>
