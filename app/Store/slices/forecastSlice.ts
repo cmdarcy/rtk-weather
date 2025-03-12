@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
 
-const APIKEY = `c8d0a8706ef69da2623e093b018f765f`;
+const APIKEY = process.env.NEXT_PUBLIC_OPEN_WEATHER_APIKEY;
 
 export type ForecastDataPoint = {
   dt: number;
@@ -67,6 +67,7 @@ export const fetchForecast = createAsyncThunk(
       } else {
         console.error('Unknown error:', error);
       }
+      throw error;
     }
   },
 );
