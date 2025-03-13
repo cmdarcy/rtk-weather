@@ -1,55 +1,43 @@
 'use client';
 
 import React from 'react';
-import Chart from './Chart';
-import {
-  ForecastDataPoint,
-  selectForecast,
-} from '../Store/slices/forecastSlice';
+import { selectForecast } from '../Store/slices/forecastSlice';
 import { useAppSelector } from '../Store/hook';
+import ShadChart from './ShadChart';
 
 function Forecast() {
   const forecast = useAppSelector(selectForecast);
-  let tempForecasts: null | number[] = null;
-  let pressureForecasts: null | number[] = null;
-  let humidityForecasts: null | number[] = null;
-  let city: null | string = null;
+  let city: string;
 
   if (forecast.status === 'succeeded') {
     city = forecast.forecast.city.name;
-    tempForecasts = forecast.forecast.list.map(
-      (foreCastEntry: ForecastDataPoint) => foreCastEntry.main.temp,
-    );
-    pressureForecasts = forecast.forecast.list.map(
-      (foreCastEntry: ForecastDataPoint) => foreCastEntry.main.pressure,
-    );
-    humidityForecasts = forecast.forecast.list.map(
-      (foreCastEntry: ForecastDataPoint) => foreCastEntry.main.humidity,
-    );
   }
 
   return (
     <div>
+      {
+        // TODO add Loading and Error Components //
+      }
       {forecast.status === 'loading' && <p>Loading...</p>}
       {forecast.status === 'failed' && <p>Error: {forecast.error}</p>}
       {forecast.status === 'succeeded' && (
         <div>
           <h2> {city} </h2>
           <div>
-            <Chart
-              title="Temperature"
-              forecastData={tempForecasts}
-              units="°F"
+            <ShadChart
+              city={city}
+              dataType="temp"
+              forecastData={forecast.forecast.list}
             />
-            <Chart
-              title="Pressure"
-              forecastData={pressureForecasts}
-              units="hPa"
+            <ShadChart
+              city={city}
+              dataType="pressure"
+              forecastData={forecast.forecast.list}
             />
-            <Chart
-              title="Humidity"
-              forecastData={humidityForecasts}
-              units="%"
+            <ShadChart
+              city={city}
+              dataType="humidity"
+              forecastData={forecast.forecast.list}
             />
           </div>
         </div>
