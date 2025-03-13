@@ -26,7 +26,7 @@ export type ForecastDataPoint = {
   visibility: number;
   pop: number;
   sys: { pod: string };
-  dt_text: string;
+  dt_txt: string;
 };
 
 export type WeatherData = {
