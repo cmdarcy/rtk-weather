@@ -35,7 +35,6 @@ function ShadSearchForm() {
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     dispatch(fetchForecast(values.city));
-    console.log(values);
   }
 
   return (

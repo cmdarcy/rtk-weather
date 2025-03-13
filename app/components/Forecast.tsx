@@ -1,9 +1,11 @@
 'use client';
 
 import React from 'react';
+import { AlertTriangle } from 'lucide-react';
 import { selectForecast } from '../Store/slices/forecastSlice';
 import { useAppSelector } from '../Store/hook';
 import ShadChart from './ShadChart';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 function Forecast() {
   const forecast = useAppSelector(selectForecast);
@@ -15,11 +17,16 @@ function Forecast() {
 
   return (
     <div className="mt-7">
-      {
-        // TODO add Loading and Error Components //
-      }
       {forecast.status === 'loading' && <p>Loading...</p>}
-      {forecast.status === 'failed' && <p>Error: {forecast.error}</p>}
+      {forecast.status === 'failed' && (
+        <Alert variant="destructive">
+          <AlertTriangle />
+          <AlertTitle>{forecast.error}</AlertTitle>
+          <AlertDescription>
+            Sorry there was an error, please try searching again!
+          </AlertDescription>
+        </Alert>
+      )}
       {forecast.status === 'succeeded' && (
         <div className="w-screen px-24">
           <h2 className=" text-center scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
