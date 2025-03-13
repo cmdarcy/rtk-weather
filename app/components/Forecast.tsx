@@ -14,16 +14,18 @@ function Forecast() {
   }
 
   return (
-    <div>
+    <div className="mt-7">
       {
         // TODO add Loading and Error Components //
       }
       {forecast.status === 'loading' && <p>Loading...</p>}
       {forecast.status === 'failed' && <p>Error: {forecast.error}</p>}
       {forecast.status === 'succeeded' && (
-        <div>
-          <h2> {city} </h2>
-          <div>
+        <div className="w-screen px-24">
+          <h2 className=" text-center scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
+            {city}
+          </h2>
+          <div className="flex flex-col gap-12">
             <ShadChart
               city={city}
               dataType="temp"

@@ -6,6 +6,7 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
@@ -93,12 +94,8 @@ function ShadChart({ forecastData, dataType, city }: ShadChartProps) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>
-          {city} - {dataType.toUpperCase()}
-        </CardTitle>
-        <CardDescription>
-          5 Day Forecast Average: {displayAverage}
-        </CardDescription>
+        <CardTitle>{dataType.toUpperCase()}</CardTitle>
+        <CardDescription>5 Day Forecast</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
@@ -111,12 +108,6 @@ function ShadChart({ forecastData, dataType, city }: ShadChartProps) {
             }}
           >
             <CartesianGrid vertical={false} />
-            <XAxis
-              dataKey="displayDate"
-              tickLine={false}
-              axisLine={false}
-              tickMargin={8}
-            />
             <ChartTooltip
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
@@ -144,6 +135,11 @@ function ShadChart({ forecastData, dataType, city }: ShadChartProps) {
           </LineChart>
         </ChartContainer>
       </CardContent>
+      <CardFooter className="flex-col items-start gap-2 text-sm">
+        <div className="leading-none text-muted-foreground">
+          {dataType.toUpperCase()} Average: {displayAverage}
+        </div>
+      </CardFooter>
     </Card>
   );
 }

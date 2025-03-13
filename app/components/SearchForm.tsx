@@ -16,6 +16,7 @@ function SearchForm() {
       alert('Please enter a city to search!');
     } else {
       dispatch(fetchForecast(searchTerm));
+      setSearchTerm('');
     }
   };
   return (
