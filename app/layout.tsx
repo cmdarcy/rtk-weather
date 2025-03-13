@@ -18,9 +18,9 @@ type RootLayoutProps = {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
-      <ProviderClient>
-        <body className={inter.className}>{children}</body>
-      </ProviderClient>
+      <body className={inter.className}>
+        <ProviderClient>{children}</ProviderClient>
+      </body>
     </html>
   );
 }
