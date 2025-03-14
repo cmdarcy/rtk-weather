@@ -21,8 +21,7 @@ import { ForecastDataPoint } from '../Store/slices/forecastSlice';
 const options: Intl.DateTimeFormatOptions = {
   weekday: 'short',
   day: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
+  hour: 'numeric',
   hour12: true,
 };
 
@@ -46,10 +45,9 @@ const chartConfig = {
 type ShadChartProps = {
   forecastData: ForecastDataPoint[];
   dataType: 'temp' | 'pressure' | 'humidity';
-  city: string;
 };
 
-function ShadChart({ forecastData, dataType, city }: ShadChartProps) {
+function ShadChart({ forecastData, dataType }: ShadChartProps) {
   const tempForecasts = forecastData.map(
     (foreCastEntry: ForecastDataPoint) => foreCastEntry.main.temp,
   );
@@ -110,7 +108,13 @@ function ShadChart({ forecastData, dataType, city }: ShadChartProps) {
             <CartesianGrid vertical={false} />
             <ChartTooltip
               cursor={false}
-              content={<ChartTooltipContent hideLabel />}
+              content={
+                <ChartTooltipContent
+                  formatter={(value, name, item, index, payload) =>
+                    `${value} at ${payload.displayDate}`
+                  }
+                />
+              }
             />
             <ReferenceLine
               y={displayAverage}
@@ -130,7 +134,6 @@ function ShadChart({ forecastData, dataType, city }: ShadChartProps) {
               activeDot={{
                 r: 6,
               }}
-              // TODO add average in footer?
             />
           </LineChart>
         </ChartContainer>
