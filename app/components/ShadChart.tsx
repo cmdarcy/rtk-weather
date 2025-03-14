@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { CartesianGrid, Line, LineChart, ReferenceLine, XAxis } from 'recharts';
+import { CartesianGrid, Line, LineChart, ReferenceLine } from 'recharts';
 import {
   Card,
   CardContent,
@@ -21,6 +21,7 @@ import { ForecastDataPoint } from '../Store/slices/forecastSlice';
 const options: Intl.DateTimeFormatOptions = {
   weekday: 'short',
   day: 'numeric',
+  month: 'short',
   hour: 'numeric',
   hour12: true,
 };
@@ -29,16 +30,14 @@ const formatter = new Intl.DateTimeFormat('en-US', options);
 
 const chartConfig = {
   temp: {
-    label: 'Temperature(in F)',
+    label: 'Temperature(℉)',
     color: '#2563eb',
   },
   pressure: {
-    label: 'Pressure(in hPa) ',
-    color: '#2563eb',
+    label: 'Pressure(hPa) ',
   },
   humidity: {
     label: 'Humidity(%)',
-    color: '#2563eb',
   },
 } satisfies ChartConfig;
 
@@ -70,13 +69,17 @@ function ShadChart({ forecastData, dataType }: ShadChartProps) {
       humidityForecasts.length,
   );
 
-  let displayAverage: number;
+  let averageLineValue: number;
+  let displayAverage: string;
   if (dataType === 'temp') {
-    displayAverage = tempAverage;
+    averageLineValue = tempAverage;
+    displayAverage = `${tempAverage} ℉`;
   } else if (dataType === 'humidity') {
-    displayAverage = humidityAverage;
+    averageLineValue = humidityAverage;
+    displayAverage = `${humidityAverage} % `;
   } else {
-    displayAverage = pressureAverage;
+    averageLineValue = pressureAverage;
+    displayAverage = `${pressureAverage} hPA`;
   }
 
   const chartData = forecastData.map((f) => {
@@ -117,13 +120,12 @@ function ShadChart({ forecastData, dataType }: ShadChartProps) {
               }
             />
             <ReferenceLine
-              y={displayAverage}
+              y={averageLineValue}
               label="Avg"
               stroke="red"
               strokeDasharray="3 3"
             />
             <Line
-              // TODO Update datakey and color variables???
               dataKey={dataType}
               type="natural"
               stroke="var(--color-temp)"

@@ -8,46 +8,34 @@ import ShadChart from './ShadChart';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 function Forecast() {
-  const forecast = useAppSelector(selectForecast);
+  const { forecast, status, error } = useAppSelector(selectForecast);
   let city: string;
 
-  if (forecast.status === 'succeeded') {
-    city = forecast.forecast.city.name;
+  if (status === 'succeeded') {
+    city = forecast.city.name;
   }
 
   return (
     <div className="mt-7">
-      {forecast.status === 'loading' && <p>Loading...</p>}
-      {forecast.status === 'failed' && (
+      {status === 'loading' && <p>Loading...</p>}
+      {status === 'failed' && (
         <Alert variant="destructive">
           <AlertTriangle />
-          <AlertTitle>{forecast.error}</AlertTitle>
+          <AlertTitle>{error}</AlertTitle>
           <AlertDescription>
             Sorry there was an error, please try searching again!
           </AlertDescription>
         </Alert>
       )}
-      {forecast.status === 'succeeded' && (
+      {status === 'succeeded' && (
         <div className="w-screen px-24">
           <h2 className=" text-center scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0">
             {city}
           </h2>
           <div className="flex flex-col gap-12">
-            <ShadChart
-              city={city}
-              dataType="temp"
-              forecastData={forecast.forecast.list}
-            />
-            <ShadChart
-              city={city}
-              dataType="pressure"
-              forecastData={forecast.forecast.list}
-            />
-            <ShadChart
-              city={city}
-              dataType="humidity"
-              forecastData={forecast.forecast.list}
-            />
+            <ShadChart dataType="temp" forecastData={forecast.list} />
+            <ShadChart dataType="pressure" forecastData={forecast.list} />
+            <ShadChart dataType="humidity" forecastData={forecast.list} />
           </div>
         </div>
       )}
