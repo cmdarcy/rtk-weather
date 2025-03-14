@@ -1,7 +1,6 @@
 'use client';
 
 import Forecast from './components/Forecast';
-import SearchForm from './components/SearchForm';
 import ShadSearchForm from './components/ShadSearchForm';
 
 export default function Home() {
