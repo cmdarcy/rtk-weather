@@ -16,7 +16,7 @@ import {
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { ForecastDataPoint } from '../Store/slices/forecastSlice';
+import { ForecastDataPoint } from '@/types/forecastTypes';
 
 const options: Intl.DateTimeFormatOptions = {
   weekday: 'short',
