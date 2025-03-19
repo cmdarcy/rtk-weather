@@ -4,6 +4,12 @@ import { WeatherData } from '@/types/forecastTypes';
 
 const APIKEY = process.env.NEXT_PUBLIC_OPEN_WEATHER_APIKEY;
 
+/**
+ * Fetches the weather forecast based on the provided search term.
+ * @param {string} searchTerm - The term to search for the forecast.
+ * @returns {Promise<WeatherData>} The weather forecast data.
+ * @throws {Error} If the fetch fails or the response is not ok.
+ */
 export const fetchForecast = createAsyncThunk(
   'forecast/fetchForecast',
   async (searchTerm: string): Promise<WeatherData> => {
@@ -59,6 +65,11 @@ const forecastSlice = createSlice({
   },
 });
 
+/**
+ * Selects the forecast from the state.
+ * @param {RootState} state - The root state.
+ * @returns {WeatherData | null} The forecast data.
+ */
 export const selectForecast = (state: RootState) => state.forecast;
 
 export default forecastSlice.reducer;

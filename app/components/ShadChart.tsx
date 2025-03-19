@@ -46,6 +46,11 @@ type ShadChartProps = {
   dataType: 'temp' | 'pressure' | 'humidity';
 };
 
+/**
+ * Renders a chart displaying forecast data for temperature, pressure, or humidity.
+ * @param {ShadChartProps} props - The properties for the chart component.
+ * @returns {JSX.Element} The rendered chart component.
+ */
 function ShadChart({ forecastData, dataType }: ShadChartProps) {
   const tempForecasts = forecastData.map(
     (foreCastEntry: ForecastDataPoint) => foreCastEntry.main.temp,

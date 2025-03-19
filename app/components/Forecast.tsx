@@ -7,6 +7,11 @@ import { useAppSelector } from '../Store/hook';
 import ShadChart from './ShadChart';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
+/**
+ * Displays the weather forecast based on the selected city.
+ * Utilizes the Redux store to retrieve forecast data.
+ * @returns {JSX.Element} The rendered forecast component.
+ */
 function Forecast() {
   const { forecast, status, error } = useAppSelector(selectForecast);
   let city: string;

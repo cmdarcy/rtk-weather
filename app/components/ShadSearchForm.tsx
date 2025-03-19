@@ -23,6 +23,10 @@ const formSchema = z.object({
   }),
 });
 
+/**
+ * A form for searching the weather forecast by city.
+ * @returns {JSX.Element} The rendered search form component.
+ */
 function ShadSearchForm() {
   const dispatch = useAppDispatch();
 

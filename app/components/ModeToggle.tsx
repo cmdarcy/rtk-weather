@@ -12,6 +12,11 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
+/**
+ * A button to toggle between light and dark themes.
+ * Utilizes the Next.js theme provider.
+ * @returns {JSX.Element} The rendered button component.
+ */
 export function ModeToggle() {
   const { setTheme } = useTheme();
 
