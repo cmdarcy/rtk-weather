@@ -10,7 +10,9 @@ export default function Home() {
       <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
         RTK Weather
       </h1>
-      <ModeToggle />
+      <div className="absolute top-4 right-4">
+        <ModeToggle />
+      </div>
       <ShadSearchForm />
       <Forecast />
     </main>
